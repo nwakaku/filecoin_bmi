@@ -1,15 +1,11 @@
-import React,{useState, useEffect} from 'react'
+import React,{useState} from 'react'
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
 
 const Balance = ({dataUrl, setDataUrl }) => {
-    useEffect(() => {
-        !dataUrl && navigate(`/`);
-        console.log(dataUrl);
-    
-      }, [dataUrl]);
+
 
     let navigate = useNavigate();
     const [last, setLast] = useState('');
@@ -49,6 +45,9 @@ const Balance = ({dataUrl, setDataUrl }) => {
           } else {
             setMessage('You were overweight')
           }
+
+          !dataUrl && navigate(`/`);
+          console.log(dataUrl);
           
       
         //   console.log(last);
@@ -62,7 +61,7 @@ const Balance = ({dataUrl, setDataUrl }) => {
 
     <div>
       <div className='center'>
-      <h3>Your BMI is: {last.your_bmi}</h3>
+      <h3>Your BMI was: {last.your_bmi}</h3>
       <p>{message}</p>
       </div>
 

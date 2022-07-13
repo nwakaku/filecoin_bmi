@@ -7,7 +7,7 @@ BMI calculator
 
 This a filecoin project BMI calculator,
 Body mass index (BMI) is a measure of body fat based on height and weight that applies to adult men and women.
-your bmi can be saved in the filecoin for future references.
+your bmi can be saved in the filecoin for future references.This project builds a bmi calculator on IPFS. Specifically, this project saves users inputs to IPFS and generates a unique paste hash for them to share. User inputs can be encrypted so that only people who know both the paste hash and the corresponding password could retrieve the underlying input.
 
 ## Name and Contact Info
 Name : Nwakaku Wisdom Izuchukwu

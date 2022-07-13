@@ -25,8 +25,10 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl,last, setLast }
   const [height, setHeight] = useState(0);
   const [message, setMessage] = useState('');
   const [hashpop, setHashpop] = useState(true);
+  const [loader, setLoader] = useState(true);
+
   const [password, setPassword] = React.useState("");
-  const err = () => {retrieveFiles(hashes)}
+  const err = () => {retrieveFiles(hashes);setLoader(!loader)}
 
 
   useEffect(() => {
@@ -165,12 +167,18 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl,last, setLast }
           <div className="close-btn" onClick={() => {setHashpop(true)}}>
             &times;
           </div>
-          <div>
+          {loader ? (
+            <div>
           <h1>Hash Phrase</h1>
-          <input value={hashes} onChange={(e) => setHashes(e.target.value)} />
-          <input value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input value={hashes} placeholder='PassPhrase' onChange={(e) => setHashes(e.target.value)} />
+          <input value={password} placeholder='PassWord' onChange={(e) => setPassword(e.target.value)} />
           <button className='btn' onClick={err} >Submit</button>
           </div>
+          ) : 
+          (<div>
+            Loading please be patient
+          </div>)}
+          
           
 
           

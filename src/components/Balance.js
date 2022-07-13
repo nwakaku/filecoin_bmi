@@ -59,7 +59,7 @@ const Balance = ({dataUrl, setDataUrl, last, setLast }) => {
 
     <div>
       <div className='center'>
-      <h3>Your BMI is: {last.your_bmi}</h3>
+      <h3>Your BMI was: {last.your_bmi}</h3>
       <p>{message}</p>
       <p>Password: {last.password}</p>
       </div>

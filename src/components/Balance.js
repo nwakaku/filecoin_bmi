@@ -1,14 +1,13 @@
 import React,{useState} from 'react'
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 
 
-const Balance = ({dataUrl, setDataUrl }) => {
+const Balance = ({dataUrl, setDataUrl, last, setLast }) => {
 
 
     let navigate = useNavigate();
-    const [last, setLast] = useState('');
+    // const [last, setLast] = useState('');
     const [message, setMessage] = useState('');
 
     let imgSrc;
@@ -33,9 +32,11 @@ const Balance = ({dataUrl, setDataUrl }) => {
 
     React.useEffect(() => {
         // if(dataUrl){
-          axios.get(`https://${dataUrl}`).then((response) => {
-            setLast(response.data);
-          });
+          // axios.get(`https://${dataUrl}`).then((response) => {
+          //   setLast(response.data);
+          // });
+          !dataUrl && navigate(`/`);
+        console.log(dataUrl);
           if (last.your_bmi < 25) {
             setMessage('You were underweight')
           } else if (last.your_bmi === undefined){
@@ -45,9 +46,6 @@ const Balance = ({dataUrl, setDataUrl }) => {
           } else {
             setMessage('You were overweight')
           }
-
-          !dataUrl && navigate(`/`);
-          console.log(dataUrl);
           
       
         //   console.log(last);
@@ -61,8 +59,9 @@ const Balance = ({dataUrl, setDataUrl }) => {
 
     <div>
       <div className='center'>
-      <h3>Your BMI was: {last.your_bmi}</h3>
+      <h3>Your BMI is: {last.your_bmi}</h3>
       <p>{message}</p>
+      <p>Password: {last.password}</p>
       </div>
 
     <div className='img-container'>
@@ -74,7 +73,7 @@ const Balance = ({dataUrl, setDataUrl }) => {
     </div>
     
     <div>
-    <button className='btn' type='submit' onClick={() => setDataUrl(``)}>Back</button>
+    <button className='btn' type='submit' onClick={() => {setDataUrl(``)}}>Back</button>
     </div>
   </div>
     </div>

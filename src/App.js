@@ -21,6 +21,8 @@ function App() {
   const [bmi, setBmi] = useState('')
   const [hashes, setHashes] = useState('');
   const [dataUrl, setDataUrl] = useState('');
+  const [last, setLast] = useState('');
+
   // const [truty, setTruty] = useState(true);
 
 
@@ -48,8 +50,11 @@ function App() {
         hashes={hashes} 
         setHashes={setHashes} 
         dataUrl={dataUrl} 
-        setDataUrl={setDataUrl} />} />
-      <Route path="balance" element={ <Balance dataUrl={dataUrl} setDataUrl={setDataUrl} />} />
+        setDataUrl={setDataUrl} 
+        last={last} 
+        setLast={setLast} />} />
+      <Route path="balance" element={ <Balance dataUrl={dataUrl} setDataUrl={setDataUrl} last={last} 
+        setLast={setLast} />} />
       {/* <Route path="invoices" element={<Invoices />} /> */}
     </Routes>
   </BrowserRouter>

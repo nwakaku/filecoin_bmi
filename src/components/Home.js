@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react';
 import { Web3Storage } from 'web3.storage';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 
 const client = new Web3Storage({
@@ -11,7 +12,12 @@ const client = new Web3Storage({
 
 
 
-const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
+const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl,last, setLast }) => {
+
+
+ 
+
+  //generating password
   let navigate = useNavigate();
 
   const [popUp, setPopUp] = useState(true);
@@ -19,22 +25,47 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
   const [height, setHeight] = useState(0);
   const [message, setMessage] = useState('');
   const [hashpop, setHashpop] = useState(true);
+  const [password, setPassword] = React.useState("");
+  const err = () => {retrieveFiles(hashes)}
+
 
   useEffect(() => {
-    dataUrl && navigate(`/balance`);
-    console.log(dataUrl);
+    // dataUrl && navigate(`/balance`);
+    // console.log(dataUrl);
+    dataUrl && axios.get(`https://${dataUrl}`).then((response) => {
+      setLast(response.data);
+      
+    });
+    if(last){
+      if(last && (last.password === password)){
+      navigate(`/balance`);        
+      }else{
+        alert('wrong password');
+        window.location.reload()
+        // setM_alert(!m_alert)
+        console.log('giftt')
+        // navigate(`/errr`)
+  
+      }
+    }
+  });
 
-  }, [dataUrl]);
+  // useEffect(() => {
+    
+    
+  // })
   
 
-
+  
 
 
   //for external control
   async function saveToWeb() {
-    if(bmi){
+    const password = Math.random().toString(36).substring(2, 15);
+    setPassword(password);
+    if(bmi && password){
       setPopUp(!popUp)
-      const jsontype = JSON.stringify({your_bmi:bmi, date: new Date()});
+      const jsontype = JSON.stringify({your_bmi:bmi, date: new Date(), password: password});
       console.log(jsontype);
       console.log({your_bmi:bmi, date: new Date()})
       const file = new File([jsontype], { type : 'application/json'});
@@ -62,8 +93,7 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
       console.log(url)
     }
     console.log(dataUrl);
-    // <Navigate to="/balance" replace={true} />
-  // setTruty(!truty);
+
 }
 
   //controls
@@ -86,8 +116,6 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
       } else {
         setMessage('You are overweight')
       }
-
-      //something
       
     }
   }
@@ -106,18 +134,6 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
       imgSrc = require('../assets/overweight.png')
     }
   }
-  // for your_bmi
-  // if (last.your_bmi < 1) {
-  //   imgSrc = null
-  // } else {
-  //   if(last.your_bmi < 25) {
-  //     imgSrc = require('../src/assets/underweight.png')
-  //   } else if (last.your_bmi >= 25 && last.your_bmi < 30) {
-  //     imgSrc = require('../src/assets/healthy.png')
-  //   } else {
-  //     imgSrc = require('../src/assets/overweight.png')
-  //   }
-  // }
 
 
   let reload = () => {
@@ -126,6 +142,7 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
 
   return (
     <div className='home_bmi'>
+
       {/* popup Ui */}
       <div className={ `${popUp ? 'popup' : 'popup active'}`} id="popup-1">
         <div className="overlay"></div>
@@ -135,7 +152,8 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
           </div>
           <h1>Hash Phrase</h1>
           {hashes.length !== 0 ? 
-          (<p> {hashes} </p>) : 
+          (<div> <p>passphrase: {hashes}</p><br/>
+          <p>password: {password}</p> </div>) : 
           (<p>Loading Please be patient</p>)}
           
         </div>
@@ -150,7 +168,8 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
           <div>
           <h1>Hash Phrase</h1>
           <input value={hashes} onChange={(e) => setHashes(e.target.value)} />
-          <button className='btn' onClick={() => {setHashpop(!hashpop);retrieveFiles(hashes)}} >Submit</button>
+          <input value={password} onChange={(e) => setPassword(e.target.value)} />
+          <button className='btn' onClick={err} >Submit</button>
           </div>
           
 
@@ -174,7 +193,7 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
         </div>
         <div>
           <button className='btn' type='submit'>Check</button>
-          {/* <button className='btn btn-outline' onClick={reload} >Reload</button> */}
+          <button className='btn btn-outline' onClick={reload} >Reload</button>
         </div>
       </form>
 
@@ -194,7 +213,7 @@ const Home = ({bmi, setBmi,hashes, setHashes,dataUrl, setDataUrl }) => {
       
       
       <div>
-      <button onClick={saveToWeb} className='btn' type='submit'>Save</button>
+      <button onClick={() => {saveToWeb()}} className='btn' type='submit'>Save</button>
       <button onClick={() => setHashpop(!hashpop)} className='btn btn-outline' type='submit'>Check Previous</button>
       </div>
     </div>

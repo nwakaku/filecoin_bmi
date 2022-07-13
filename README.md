@@ -1,6 +1,26 @@
-# Getting Started with Create React App
+# Project Description
 
-This a filecoin project BMI calculator
+## Name
+BMI calculator
+
+## summary
+
+This a filecoin project BMI calculator,
+Body mass index (BMI) is a measure of body fat based on height and weight that applies to adult men and women.
+your bmi can be saved in the filecoin for future references.
+
+## Name and Contact Info
+Name : Nwakaku Wisdom Izuchukwu
+GithubHandle : https://github.com/nwakaku
+Email: Nwakakucc@gmail.com
+
+
+## How the project uses IPFS and/or Filecoin and/or decentralized storage services that build on top of either with example links to where in code those technologies are used
+
+The project uses web3.storage for decentralized storage and retrieval and fleek for hosting.
+
+### links
+https://github.com/nwakaku/filecoin_bmi/blob/main/src/components/Home.js
 
 ## Available Scripts
 

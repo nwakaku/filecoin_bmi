@@ -17,12 +17,11 @@ Email: Nwakakucc@gmail.com
 
 ## How the project uses IPFS and/or Filecoin and/or decentralized storage services that build on top of either with example links to where in code those technologies are used
 
-The project uses web3.storage for decentralized storage and retrieval and fleek for hosting.
+The project uses web3.storage for decentralized storage and retrieval 
 
 ### links
 https://github.com/nwakaku/filecoin_bmi/blob/main/src/components/Home.js
 
-its also hosted in fleek via
 
 
 ## Available Scripts

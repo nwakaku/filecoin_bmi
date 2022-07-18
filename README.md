@@ -22,6 +22,9 @@ The project uses web3.storage for decentralized storage and retrieval and fleek 
 ### links
 https://github.com/nwakaku/filecoin_bmi/blob/main/src/components/Home.js
 
+its also hosted in fleek via
+https://frosty-heart-2663.on.fleek.co/
+
 ## Available Scripts
 
 After you have installed 
